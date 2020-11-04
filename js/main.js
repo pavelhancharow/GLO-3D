@@ -42,17 +42,22 @@ window.addEventListener('DOMContentLoaded', function () {
     const btnMenu = document.querySelector('.menu'),
       menu = document.querySelector('menu'),
       closeBtn = document.querySelector('.close-btn'),
-      menuItems = menu.querySelectorAll('ul>li');
+      menuItems = menu.querySelectorAll('ul>li'),
+      anchor = document.querySelectorAll('a[href*="#"]');
 
     const handlerMenu = () => {
       menu.classList.toggle('active-menu');
     };
 
-
-
     btnMenu.addEventListener('click', handlerMenu);
     closeBtn.addEventListener('click', handlerMenu);
     menuItems.forEach((item) => item.addEventListener('click', handlerMenu));
+    anchor.forEach((item) => item.addEventListener('click', (e) => {
+      e.preventDefault();
+      document.querySelector(item.getAttribute('href')).scrollIntoView({
+        behavior: 'smooth'
+      });
+    }));
   };
   toggleMenu();
 
