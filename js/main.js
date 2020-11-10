@@ -268,4 +268,15 @@ window.addEventListener('DOMContentLoaded', function () {
 
   };
   slider();
+
+  const ourTeam = () => {
+    const commandPhoto = document.querySelectorAll('.command__photo');
+
+    commandPhoto.forEach((item) => {
+      let imgSrc = item.getAttribute('src');
+      item.addEventListener('mouseover', (e) => e.target.src = e.target.dataset.img);
+      item.addEventListener('mouseout', (e) => e.target.src = imgSrc);
+    });
+  };
+  ourTeam();
 });
