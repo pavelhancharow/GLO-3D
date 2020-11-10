@@ -269,6 +269,8 @@ window.addEventListener('DOMContentLoaded', function () {
   };
   slider();
 
+  //change image
+
   const ourTeam = () => {
     const commandPhoto = document.querySelectorAll('.command__photo');
 
@@ -279,4 +281,15 @@ window.addEventListener('DOMContentLoaded', function () {
     });
   };
   ourTeam();
+
+  //calc validate
+
+  const calc = () => {
+    const input = document.querySelectorAll('.calc-item');
+
+    input.forEach(item => {
+      item.addEventListener('input', () => item.value = item.value.replace(/\D/g, ''));
+    });
+  };
+  calc();
 });
