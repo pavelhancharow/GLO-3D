@@ -376,7 +376,8 @@ window.addEventListener('DOMContentLoaded', function () {
       successMessage = 'Спасибо! Мы скоро с вами свяжемся!';
 
     const inputSymbols = document.querySelectorAll('[name=user_name],[name=user_message]'),
-      inputPhone = document.querySelectorAll('[name="user_phone"]');
+      inputPhone = document.querySelectorAll('[name="user_phone"]'),
+      inputEmail = document.querySelectorAll('[name="user_email"]');
 
     inputSymbols.forEach(item => {
       item.addEventListener('input', () => {
@@ -387,6 +388,12 @@ window.addEventListener('DOMContentLoaded', function () {
     inputPhone.forEach(item => {
       item.addEventListener('input', () => {
         item.value = item.value.replace(/[^0-9+]/ig, '');
+      });
+    });
+
+    inputEmail.forEach(item => {
+      item.addEventListener('input', () => {
+        item.value = item.value.replace(/[^\S]/gi, '');
       });
     });
 
