@@ -399,7 +399,28 @@ window.addEventListener('DOMContentLoaded', function () {
         });
     });
 
-
+    form3.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const formData = new FormData(form3);
+      let body = {};
+      formData.forEach((val, key) => {
+        body[key] = val;
+      });
+      postData(body,
+        () => {
+          statusMessage.textContent = successMessage;
+          const inputs = form3.querySelectorAll('input');
+          inputs.forEach(item => item.value = '');
+        },
+        (error) => {
+          statusMessage.textContent = errorMessage;
+          console.log(error);
+        });
+      form3.textContent = '';
+      statusMessage.style.color = '#FFFFFF';
+      statusMessage.textContent = loadMessage;
+      form3.append(statusMessage);
+    });
 
     form2.addEventListener('submit', (e) => {
       e.preventDefault();
