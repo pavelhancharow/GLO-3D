@@ -353,7 +353,7 @@ window.addEventListener('DOMContentLoaded', function () {
 
   const sendForm = () => {
     const errorMessage = 'Что то пошло не так...',
-      loadMessage = 'Загрузка...',
+      // loadMessage = 'Загрузка...',
       successMessage = 'Спасибо! Мы скоро с вами свяжемся!';
 
     const inputSymbols = document.querySelectorAll('[name=user_name],[name=user_message]'),
@@ -375,13 +375,32 @@ window.addEventListener('DOMContentLoaded', function () {
       form2 = document.getElementById('form2'),
       form3 = document.getElementById('form3'),
       description = document.querySelectorAll('.description');
+
     const statusMessage = document.createElement('div');
-    statusMessage.style.cssText = 'font-size: 2rem';
+    statusMessage.style.cssText = 'font-size: 2rem; color: #ffffff';
+    statusMessage.innerHTML = `
+          <div class="load-wrapp">
+            <div class="load-6">
+              <div class="letter-holder">
+                <div class="l-1 letter">З</div>
+                <div class="l-2 letter">а</div>
+                <div class="l-3 letter">г</div>
+                <div class="l-4 letter">р</div>
+                <div class="l-5 letter">у</div>
+                <div class="l-6 letter">з</div>
+                <div class="l-7 letter">к</div>
+                <div class="l-8 letter">а</div>
+                <div class="l-9 letter">.</div>
+                <div class="l-10 letter">.</div>
+                <div class="l-11 letter">.</div>
+              </div>
+            </div>
+          </div>`;
 
     form.addEventListener('submit', (e) => {
       e.preventDefault();
       form.append(statusMessage);
-      statusMessage.textContent = loadMessage;
+
       const formData = new FormData(form);
       let body = {};
       formData.forEach((val, key) => {
@@ -417,14 +436,14 @@ window.addEventListener('DOMContentLoaded', function () {
           console.log(error);
         });
       form3.textContent = '';
-      statusMessage.style.color = '#FFFFFF';
-      statusMessage.textContent = loadMessage;
       form3.append(statusMessage);
     });
 
     form2.addEventListener('submit', (e) => {
       e.preventDefault();
-      description[7].textContent = loadMessage;
+      description[7].textContent = '';
+      description[7].append(statusMessage);
+
       const formData = new FormData(form2);
       let body = {};
       formData.forEach((val, key) => {
