@@ -53,7 +53,14 @@ window.addEventListener('DOMContentLoaded', function () {
   //smooth-scroll
 
   const smoothScroll = () => {
-    const anchor = document.querySelectorAll('ul li a[href*="#"]');
+    const anchor = document.querySelectorAll('ul li a[href*="#"]'),
+      anchorMenu = document.querySelector('[href="#service-block"]');
+    anchorMenu.addEventListener('click', (e) => {
+      e.preventDefault();
+      document.querySelector(anchorMenu.getAttribute('href')).scrollIntoView({
+        behavior: 'smooth'
+      });
+    });
     anchor.forEach(item => item.addEventListener('click', (e) => {
       e.preventDefault();
       document.querySelector(item.getAttribute('href')).scrollIntoView({
