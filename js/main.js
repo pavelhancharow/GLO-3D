@@ -432,6 +432,32 @@ window.addEventListener('DOMContentLoaded', function () {
 
     form3.addEventListener('submit', (e) => {
       e.preventDefault();
+
+      const closeModal = () => {
+        const popupContent = document.querySelector('.popup-content'),
+          popup = document.querySelector('.popup');
+        if (document.documentElement.clientWidth > 768) {
+          let count = 0;
+          let popupUp = () => {
+            count--;
+            if (count < -100) {
+              clearTimeout(popupUp);
+            } else {
+              popupContent.style.top = `${count}%`;
+              setTimeout(popupUp, 10);
+            }
+          };
+          setTimeout(popupUp, 1000);
+          setTimeout(() => {
+            popup.style.display = 'none';
+          }, 2000);
+        } else {
+          setTimeout(() => {
+            popup.style.display = 'none';
+          }, 2000);
+        }
+      };
+
       const formData = new FormData(form3);
       let body = {};
       formData.forEach((val, key) => {
@@ -442,10 +468,12 @@ window.addEventListener('DOMContentLoaded', function () {
           statusMessage.textContent = successMessage;
           const inputs = form3.querySelectorAll('input');
           inputs.forEach(item => item.value = '');
+          closeModal();
         },
         (error) => {
           statusMessage.textContent = errorMessage;
           console.log(error);
+          closeModal();
         });
       form3.textContent = '';
       form3.append(statusMessage);
