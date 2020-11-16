@@ -38,8 +38,7 @@ window.addEventListener('DOMContentLoaded', function () {
   //menu
 
   const toggleMenu = () => {
-    const btnMenu = document.querySelector('.menu'),
-      menu = document.querySelector('menu');
+    const menu = document.querySelector('menu');
 
     document.addEventListener('click', (e) => {
       if (e.target.closest('.menu')) {
@@ -50,6 +49,19 @@ window.addEventListener('DOMContentLoaded', function () {
     });
   };
   toggleMenu();
+
+  //smooth-scroll
+
+  const smoothScroll = () => {
+    const anchor = document.querySelectorAll('ul li a[href*="#"]');
+    anchor.forEach(item => item.addEventListener('click', (e) => {
+      e.preventDefault();
+      document.querySelector(item.getAttribute('href')).scrollIntoView({
+        behavior: 'smooth'
+      });
+    }));
+  };
+  smoothScroll();
 
   //popup
 
