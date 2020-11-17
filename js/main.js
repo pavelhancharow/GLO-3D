@@ -432,15 +432,17 @@ window.addEventListener('DOMContentLoaded', function () {
       formData.forEach((val, key) => {
         body[key] = val;
       });
-      postData(body,
-        () => {
+      postData(body)
+        .then(() => {
           statusMessage.textContent = successMessage;
-          const inputs = form.querySelectorAll('input');
-          inputs.forEach(item => item.value = '');
-        },
-        (error) => {
+        })
+        .catch((error) => {
           statusMessage.textContent = errorMessage;
           console.log(error);
+        })
+        .finally(() => {
+          const inputs = form.querySelectorAll('input');
+          inputs.forEach(item => item.value = '');
         });
     });
 
@@ -477,16 +479,18 @@ window.addEventListener('DOMContentLoaded', function () {
       formData.forEach((val, key) => {
         body[key] = val;
       });
-      postData(body,
-        () => {
+      postData(body)
+        .then(() => {
           statusMessage.textContent = successMessage;
-          const inputs = form3.querySelectorAll('input');
-          inputs.forEach(item => item.value = '');
-          closeModal();
-        },
-        (error) => {
+        })
+        .catch((error) => {
           statusMessage.textContent = errorMessage;
           console.log(error);
+          closeModal();
+        })
+        .finally(() => {
+          const inputs = form3.querySelectorAll('input');
+          inputs.forEach(item => item.value = '');
           closeModal();
         });
       form3.textContent = '';
@@ -503,36 +507,42 @@ window.addEventListener('DOMContentLoaded', function () {
       formData.forEach((val, key) => {
         body[key] = val;
       });
-      postData(body,
-        () => {
+
+      postData(body)
+        .then(() => {
           description[7].textContent = successMessage;
-          const inputs = form2.querySelectorAll('input');
-          inputs.forEach(item => item.value = '');
-        },
-        (error) => {
+        })
+        .catch((error) => {
           description[7].textContent = errorMessage;
           console.log(error);
+        })
+        .finally(() => {
+          const inputs = form2.querySelectorAll('input');
+          inputs.forEach(item => item.value = '');
         });
     });
 
-    const postData = (body, outputData, errorData) => {
-      const request = new XMLHttpRequest();
-      request.addEventListener('readystatechange', () => {
+    const postData = (body) => {
+      return new Promise((resolve, reject) => {
+        const request = new XMLHttpRequest();
+        request.addEventListener('readystatechange', () => {
 
-        if (request.readyState !== 4) {
-          return;
-        }
-        if (request.status === 200) {
-          outputData();
-        } else {
-          errorData(request.status);
-        }
+          if (request.readyState !== 4) {
+            return;
+          }
+          if (request.status === 200) {
+            resolve();
+          } else {
+            reject(request.status);
+          }
+        });
+
+        request.open('POST', './server.php');
+        request.setRequestHeader('Content-Type', 'application/json');
+
+        request.send(JSON.stringify(body));
       });
 
-      request.open('POST', './server.php');
-      request.setRequestHeader('Content-Type', 'application/json');
-
-      request.send(JSON.stringify(body));
     };
   };
 
