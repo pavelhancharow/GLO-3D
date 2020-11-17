@@ -387,7 +387,7 @@ window.addEventListener('DOMContentLoaded', function () {
 
     inputPhone.forEach(item => {
       item.addEventListener('input', () => {
-        item.value = item.value.replace(/[^0-9+]/ig, '');
+        item.value = item.value.replace(/[^0-9+]|[0-9]{13}$/ig, '');
       });
     });
 
