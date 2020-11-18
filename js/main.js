@@ -1,7 +1,7 @@
 window.addEventListener('DOMContentLoaded', function () {
   'use strict';
 
-  function counterTimer(deadline) {
+  const counterTimer = (deadline) => {
     let timerHours = document.querySelector('#timer-hours'),
       timerMinutes = document.querySelector('#timer-minutes'),
       timerSeconds = document.querySelector('#timer-seconds');
@@ -32,7 +32,7 @@ window.addEventListener('DOMContentLoaded', function () {
     }
     let idInterval = setInterval(updateClock, 1000);
     updateClock();
-  }
+  };
   counterTimer('6 November 2020 00:00');
 
   //menu
