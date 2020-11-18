@@ -287,7 +287,7 @@ window.addEventListener('DOMContentLoaded', function () {
     const commandPhoto = document.querySelectorAll('.command__photo');
 
     commandPhoto.forEach(item => {
-      let imgSrc = item.getAttribute('src');
+      const imgSrc = item.getAttribute('src');
       item.addEventListener('mouseover', (e) => e.target.src = e.target.dataset.img);
       item.addEventListener('mouseout', (e) => e.target.src = imgSrc);
     });
@@ -369,25 +369,20 @@ window.addEventListener('DOMContentLoaded', function () {
 
     const inputSymbols = document.querySelectorAll('[name=user_name],[name=user_message]'),
       inputPhone = document.querySelectorAll('[name="user_phone"]'),
-      inputEmail = document.querySelectorAll('[name="user_email"]');
+      inputEmail = document.querySelectorAll('[name="user_email"]'),
+      formInputs = [inputSymbols, inputPhone, inputEmail];
 
-    inputSymbols.forEach(item => {
-      item.addEventListener('input', () => {
-        item.value = item.value.replace(/[^а-яё\s]/ig, '');
+    formInputs.forEach((item, index) => item.forEach(input => {
+      input.addEventListener('input', () => {
+        if (index === 0) {
+          input.value = input.value.replace(/[^а-яё\s]/ig, '');
+        } else if (index === 1) {
+          input.value = input.value.replace(/[^0-9+]|[0-9]{13}$/ig, '');
+        } else {
+          input.value = input.value.replace(/[^\S]/gi, '');
+        }
       });
-    });
-
-    inputPhone.forEach(item => {
-      item.addEventListener('input', () => {
-        item.value = item.value.replace(/[^0-9+]|[0-9]{13}$/ig, '');
-      });
-    });
-
-    inputEmail.forEach(item => {
-      item.addEventListener('input', () => {
-        item.value = item.value.replace(/[^\S]/gi, '');
-      });
-    });
+    }));
 
     const form = document.getElementById('form1'),
       form2 = document.getElementById('form2'),
@@ -504,6 +499,5 @@ window.addEventListener('DOMContentLoaded', function () {
       });
     };
   };
-
   sendForm();
 });
