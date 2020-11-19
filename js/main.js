@@ -374,7 +374,10 @@ window.addEventListener('DOMContentLoaded', function () {
         if (index === 0) {
           input.value = input.value.replace(/[^а-яё\s]/ig, '');
         } else if (index === 1) {
-          input.value = input.value.replace(/[^0-9+]|[0-9]{13}$/ig, '');
+          input.value = input.value.replace(/[^0-9+]/ig, '').substring(0, 13);
+          if (input.value.length >= 7) {
+            input.style.border = 'none';
+          }
         } else {
           input.value = input.value.replace(/[^\S]/gi, '');
         }
@@ -426,6 +429,13 @@ window.addEventListener('DOMContentLoaded', function () {
     forms.forEach((form, index) => {
       form.addEventListener('submit', (e) => {
         e.preventDefault();
+
+        const inputPhone = form.querySelector('.form-phone');
+        if (inputPhone.value.length < 7) {
+          alert('Введите номер телефона больше 6 цифр');
+          inputPhone.style.border = '1px solid red';
+          return;
+        }
 
         if (index === 2) {
           form.prepend(statusMessage);
