@@ -432,8 +432,8 @@ window.addEventListener('DOMContentLoaded', function () {
 
         const inputPhone = form.querySelector('.form-phone');
         if (inputPhone.value.length < 7) {
-          alert('Введите номер телефона больше 6 цифр');
           inputPhone.style.border = '1px solid red';
+          alert('Введите номер телефона больше 6 цифр');
           return;
         }
 
