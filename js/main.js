@@ -361,12 +361,9 @@ window.addEventListener('DOMContentLoaded', function () {
   };
   calc(100);
 
-  //send-ajax-form
+  //validate inputs
 
-  const sendForm = () => {
-    const errorMessage = 'Что то пошло не так...',
-      successMessage = 'Спасибо! Мы скоро с вами свяжемся!';
-
+  const inputsValidate = () => {
     const inputSymbols = document.querySelectorAll('[name=user_name],[name=user_message]'),
       inputPhone = document.querySelectorAll('[name="user_phone"]'),
       inputEmail = document.querySelectorAll('[name="user_email"]'),
@@ -383,6 +380,14 @@ window.addEventListener('DOMContentLoaded', function () {
         }
       });
     }));
+  };
+  inputsValidate();
+
+  //send-ajax-form
+
+  const sendForm = () => {
+    const errorMessage = 'Что то пошло не так...',
+      successMessage = 'Спасибо! Мы скоро с вами свяжемся!';
 
     const form = document.getElementById('form1'),
       form2 = document.getElementById('form2'),
@@ -417,7 +422,21 @@ window.addEventListener('DOMContentLoaded', function () {
 
     const statusMessage = document.createElement('div');
     statusMessage.style.cssText = 'font-size: 2rem; color: #ffffff';
-    statusMessage.innerHTML = `
+
+    forms.forEach((form, index) => {
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        if (index === 2) {
+          form.prepend(statusMessage);
+        } else if (index === 1) {
+          description[7].textContent = '';
+          description[7].append(statusMessage);
+        } else {
+          form.append(statusMessage);
+        }
+
+        statusMessage.innerHTML = `
           <div class="load-wrapp">
             <div class="load-6">
               <div class="letter-holder">
@@ -435,19 +454,6 @@ window.addEventListener('DOMContentLoaded', function () {
               </div>
             </div>
           </div>`;
-
-    forms.forEach((form, index) => {
-      form.addEventListener('submit', (e) => {
-        e.preventDefault();
-
-        if (index === 2) {
-          form.prepend(statusMessage);
-        } else if (index === 1) {
-          description[7].textContent = '';
-          description[7].append(statusMessage);
-        } else {
-          form.append(statusMessage);
-        }
 
         const formData = new FormData(form);
         let body = {};
@@ -479,7 +485,7 @@ window.addEventListener('DOMContentLoaded', function () {
               if (index === 1) {
                 description[7].textContent = 'Задайте их в форме ниже и наши специалисты свяжуться с Вами!';
               } else {
-                statusMessage.style.display = 'none';
+                statusMessage.remove();
               }
             }, 2000);
             if (index === 2) {
