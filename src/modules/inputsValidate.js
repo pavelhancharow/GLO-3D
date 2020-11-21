@@ -1,8 +1,9 @@
 const inputsValidate = () => {
-  const inputSymbols = document.querySelectorAll('[name=user_name],[name=user_message]'),
+  const inputName = document.querySelectorAll('[name=user_name]'),
+    inputMessage = document.querySelector('[name=user_message]'),
     inputPhone = document.querySelectorAll('[name="user_phone"]'),
     inputEmail = document.querySelectorAll('[name="user_email"]'),
-    formInputs = [inputSymbols, inputPhone, inputEmail];
+    formInputs = [inputName, inputPhone, inputMessage, inputEmail];
 
   formInputs.forEach((item, index) => item.forEach(input => {
     input.addEventListener('input', () => {
@@ -13,9 +14,12 @@ const inputsValidate = () => {
         if (input.value.length >= 7) {
           input.style.border = 'none';
         }
+      } else if (index === 2) {
+        input.value = input.value.replace(/[а-яё\s]+$/ig, '');
       } else {
         input.value = input.value.replace(/[^\S]/gi, '');
       }
+      input.style.border = 'none';
     });
   }));
 };

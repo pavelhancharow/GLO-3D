@@ -40,10 +40,21 @@ const sendForm = () => {
     form.addEventListener('submit', (e) => {
       e.preventDefault();
 
-      const inputPhone = form.querySelector('.form-phone');
-      if (inputPhone.value.length < 7) {
+      const inputPhone = form.querySelector('.form-phone'),
+        inputEmail = form.querySelector('.form-email'),
+        inputUserName = form.querySelector('[name=user_name]');
+
+      if (!inputPhone.value.match(/^[\+]?[0-9]{7,13}$/ig)) {
         inputPhone.style.border = '1px solid red';
-        alert('Введите номер телефона больше 6 цифр');
+        alert('Вы ввели некорректный номер телефона');
+        return;
+      } else if (!inputEmail.value.match(/\w+@\w+\.\w{2,}/ig)) {
+        inputEmail.style.border = '1px solid red';
+        alert('Вы ввели некорректный адрес электронной почты');
+        return;
+      } else if (inputUserName.value === '') {
+        inputUserName.style.border = '1px solid red';
+        alert('Введите ваше имя');
         return;
       }
 
