@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "webpack",
+    "dev": "webpack serve"
   },
   "repository": {
     "type": "git",
@@ -16,5 +17,21 @@
   "bugs": {
     "url": "https://github.com/pavelhancharow/GLO-3D/issues"
   },
-  "homepage": "https://github.com/pavelhancharow/GLO-3D#readme"
+  "homepage": "https://github.com/pavelhancharow/GLO-3D#readme",
+  "devDependencies": {
+    "@babel/core": "^7.12.7",
+    "@babel/preset-env": "^7.12.7",
+    "babel-loader": "^8.2.1",
+    "webpack": "^5.6.0",
+    "webpack-cli": "^4.2.0"
+  },
+  "dependencies": {
+    "@babel/polyfill": "^7.12.1",
+    "element-closest": "^3.0.2",
+    "es6-promise": "^4.2.8",
+    "fetch-polyfill": "^0.8.2",
+    "formdata-polyfill": "^3.0.20",
+    "nodelist-foreach-polyfill": "^1.2.0",
+    "webpack-dev-server": "^3.11.0"
+  }
 }

@@ -1,4 +1,11 @@
 'use strict';
+import '@babel/polyfill';
+import 'nodelist-foreach-polyfill';
+import elementClosest from 'element-closest';
+import 'formdata-polyfill';
+import 'es6-promise';
+import 'fetch-polyfill';
+elementClosest(window);
 
 import counterTimer from './modules/counterTimer';
 import toggleMenu from './modules/toggleMenu';
@@ -9,9 +16,9 @@ import slider from './modules/slider';
 import ourTeam from './modules/ourTeam';
 import calc from './modules/calc';
 import inputsValidate from './modules/inputsValidate';
-import sendForm from './modules/inputsValidate';
+import sendForm from './modules/sendForm';
 
-counterTimer('6 November 2020 00:00');
+counterTimer('22 November 2020 00:00');
 toggleMenu();
 smoothScroll();
 togglePopup();
