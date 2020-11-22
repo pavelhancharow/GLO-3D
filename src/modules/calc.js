@@ -13,12 +13,25 @@ const calc = (price = 100) => {
     }
   });
 
+  let count = 0,
+    total = 0;
+
+  const totalOdometer = () => {
+    const requestId = requestAnimationFrame(totalOdometer);
+    if (count < total) {
+      count += 100;
+      totalValue.textContent = count;
+    } else if (count > total) {
+      count -= 100;
+      totalValue.textContent = count;
+    } else {
+      cancelAnimationFrame(requestId);
+    }
+  };
+
   const countSum = () => {
-    let total = 0,
-      countValue = 1,
-      dayValue = 1,
-      count = 0,
-      intervalTime;
+    let countValue = 1,
+      dayValue = 1;
 
     const typeValue = calcType.options[calcType.selectedIndex].value,
       squareValue = +calcSquare.value;
@@ -34,35 +47,21 @@ const calc = (price = 100) => {
     }
 
     if (typeValue && squareValue) {
-      total = price * typeValue * squareValue * countValue * dayValue;
+      total = Math.floor(price * typeValue * squareValue * countValue * dayValue);
     } else {
       total = 0;
-      totalValue.textContent = total;
     }
-
-    const totalResult = Math.floor(total);
-
-    let numberUp = () => {
-      count += 100;
-      if (count <= totalResult) {
-        totalValue.textContent = count;
-        intervalTime = setTimeout(numberUp, 1);
-      } else {
-        clearTimeout(intervalTime);
-        count = 0;
-      }
-    };
-    setTimeout(numberUp, 100);
+    totalOdometer();
   };
 
   calcBlock.addEventListener('change', (e) => {
-    const target = e.target;
 
-    if (target.matches('select') || target.matches('input')) {
+    if (e.target.matches('select') || e.target.matches('input')) {
       countSum();
     }
   });
 
 };
+calc(100);
 
 export default calc;
