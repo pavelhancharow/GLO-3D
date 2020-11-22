@@ -15,7 +15,7 @@ const inputsValidate = () => {
           input.style.border = 'none';
         }
       } else if (index === 2) {
-        input.value = input.value.replace(/[а-яё\s]+$/ig, '');
+        input.value = input.value.replace(/[^а-яё\s\W]/ig, '');
       } else {
         input.value = input.value.replace(/[^\S]/gi, '');
       }
