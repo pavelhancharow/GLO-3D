@@ -27,11 +27,13 @@
   },
   "dependencies": {
     "@babel/polyfill": "^7.12.1",
+    "cross-browser-polyfill": "^1.0.5",
     "element-closest": "^3.0.2",
     "es6-promise": "^4.2.8",
     "fetch-polyfill": "^0.8.2",
     "formdata-polyfill": "^3.0.20",
     "nodelist-foreach-polyfill": "^1.2.0",
+    "regexp-polyfill": "^1.0.1",
     "webpack-dev-server": "^3.11.0"
   }
 }
