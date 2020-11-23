@@ -47,7 +47,7 @@ const togglePopup = () => {
 
       let popupUp = () => {
         count--;
-        if (count < -100) {
+        if (count < -30) {
           clearTimeout(popupUp);
         } else {
           popupContent.style.top = `${count}%`;
