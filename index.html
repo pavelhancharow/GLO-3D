@@ -408,19 +408,27 @@
 	<script src="js/validate.js"></script>
 	<script>
 		const valid = new Validator({
-			selector: '#form2',
+			selector: 'form',
 			pattern: {
 				phone: /^\+380\d{7}$/,
 				zip: /\d{5,6}/
 			},
 			method: {
-				'form2-phone': [
+				'user_name': [
+					['notEmpty'],
+					['pattern', 'name']
+				],
+				'user_phone': [
 					['notEmpty'],
 					['pattern', 'phone']
 				],
-				'form2-email': [
+				'user_email': [
 					['notEmpty'],
 					['pattern', 'email']
+				],
+				'user_message': [
+					['notEmpty'],
+					['pattern', 'message']
 				]
 			}
 		});
